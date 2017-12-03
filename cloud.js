@@ -21,3 +21,11 @@ AV.Cloud.define('averageStars', function(request, response) {
   });
 });
 
+
+AV.Cloud.afterSave('_User', function(request) {
+  console.log(request.object);
+  request.object.set('from','LeanCloud');
+  return request.object.save().then(function(user)  {
+    console.log('ok!');
+  });
+});
