@@ -5,4 +5,19 @@ var AV = require('leanengine');
  */
 AV.Cloud.define('ahello', function(request) {
   return 'Hello world!';
+})
+
+AV.Cloud.define('averageStars', function(request, response) {
+  var query = new AV.Query('Review');
+  query.equalTo('movie', request.params.movie);
+  query.find().then(function(results) {
+    var sum = 0;
+    for (var i = 0; i < results.length; i++ ) {
+      sum += results[i].get('stars');
+    }
+    response.success(sum / results.length);
+  }).catch(function(error) {
+    response.error('查询失败');
+  });
 });
+
