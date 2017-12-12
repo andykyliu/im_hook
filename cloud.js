@@ -29,3 +29,16 @@ AV.Cloud.afterSave('_User', function(request) {
     console.log('ok!');
   });
 });
+
+AV.Cloud.onIMConversationStarted((request) => {
+    let params = request.params;
+    console.log('params', params);
+
+    // 在云引擎中打印的日志如下：
+    // params {
+    //     convId: '5789a33a1b8694ad267d8040',
+    //     __sign: '1472723167361,f5ceedde159408002fc4edb96b72aafa14bc60bb'
+    // }
+});
+
+
