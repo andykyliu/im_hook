@@ -29,7 +29,7 @@ AV.Cloud.onIMConversationStarted((request) => {
 
 AV.Cloud.onIMMessageReceived((request) => {
   var http = require('http');
-  var url = "http://10.10.211.150:8681";
+  var url = "http://125.227.43.46:8681";
 
   http.get(url, function(response) {
     var finalData = "";
