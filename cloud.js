@@ -28,22 +28,20 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
-  var http = require('http');
-  var url = "http://125.227.43.46:8681";
+  var request = require('request');
+  var url = "http://125.227.43.46:8681/api/im/blacklist?memberId=90192197-5B09-E711-8D8E-000C2924F676";
+  request({
+    url: url,
+    method: 'GET',
+    headers: [ ],
+    },
+    function (error, response, body) {
+        if (error) throw error;
+          console.log(body);
+    }
 
-  http.get(url, function(response) {
-    var finalData = "";
-    console.log("test http");
-    response.on("data", function (data) {
-      finalData += data.toString();
-    });
+  )
 
-    response.on("end", function() {
-      console.log(finalData.length);
-      console.log(finalData.toString());
-    });
-
-  })
 
  let content = request.params.content;
     console.log('content', content);
