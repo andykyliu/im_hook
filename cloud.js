@@ -27,6 +27,34 @@ AV.Cloud.onIMConversationStarted((request) => {
     // }
 });
 
+AV.Cloud.onIMMessageReceived((request) => {
+  var http = require('http');
+  var url = "http://10.10.211.150:8681";
+
+  http.get(url, function(response) {
+    var finalData = "";
+
+    response.on("data", function (data) {
+      finalData += data.toString();
+    });
+
+    response.on("end", function() {
+      console.log(finalData.length);
+      console.log(finalData.toString());
+    });
+
+  })
+
+ let content = request.params.content;
+    console.log('content', content);
+    let processedContent = content.replace('XX中介', '**');
+    // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
+  return {
+    content: processedContent
+  };
+});
+
+
 AV.Cloud.onLogin(function(request) {
   // 因为此时用户还没有登录，所以用户信息是保存在 request.object 对象中
   console.log("on login:", request.object);
