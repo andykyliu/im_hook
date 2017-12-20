@@ -35,7 +35,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     var extServerOptions = {
         host: API_URL,
         port: API_URL_PORT,
-        path: '/api/im/blacklist?memberId='+params.fromPeer,
+        path: '/api/im/blacklist?memberId=90192197-5B09-E711-8D8E-000C2924F676',
         method: 'GET'
     };
     function get() {
