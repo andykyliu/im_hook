@@ -48,7 +48,8 @@ AV.Cloud.onIMMessageReceived((request) => {
          }).end();
     };
     get();
-
+    console.log('params',params);
+    console.log('params.p',params.fromPeer);
 
 
 
