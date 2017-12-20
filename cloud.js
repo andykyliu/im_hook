@@ -33,7 +33,7 @@ AV.Cloud.onIMMessageReceived((request) => {
 
   http.get(url, function(response) {
     var finalData = "";
-
+    console.log("test http");
     response.on("data", function (data) {
       finalData += data.toString();
     });
@@ -48,6 +48,7 @@ AV.Cloud.onIMMessageReceived((request) => {
  let content = request.params.content;
     console.log('content', content);
     let processedContent = content.replace('XX中介', '**');
+    console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return {
     content: processedContent
