@@ -61,7 +61,7 @@ AV.Cloud.onLogin(function(request) {
 
 function _get(api_func,callback) {
     var options = {
-        uri : API_URL+api_func,
+        uri : 'http://125.227.43.46:8681/api/im/censored-words',
         method : 'GET'
     }; 
     var res = '';
