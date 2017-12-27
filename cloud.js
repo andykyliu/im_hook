@@ -1,5 +1,4 @@
 var AV = require('leanengine');
-var req= require('request');
 var API_URL='125.227.43.46';
 var API_URL_PORT='8681';
 /**
@@ -33,31 +32,13 @@ AV.Cloud.onIMMessageReceived((request) => {
 
      let params = request.params;
      let content = request.params.content;
-     var http = require('http');
-     var word = [];
-     var extServerOptions = {
-         host: API_URL,
-         port: API_URL_PORT,
-         path: '/api/im/censored-words',
-         method: 'GET'
-     };
-     let processedContent=content;
-     function get() {
-         http.request(extServerOptions, function (res) {
-             res.setEncoding('utf8');
-             res.on('data', function (data) {
-                 word = JSON.parse(data);
-                 word.data.forEach(function(w){
-                     processedContent = content.replace(w, '**');
-                 })
+     var word="";
+     g(function(p){
+          word=p;
+      });
 
-             
-             });
-          }).end();
-     };
-     get();
-
-
+console.log(word);
+      let processedContent = content.replace('XX中介', '**');
 
     console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
@@ -75,4 +56,25 @@ AV.Cloud.onLogin(function(request) {
     throw new AV.Cloud.Error('Forbidden');
   }
 });
+
+ function g(callback){
+   var http = require('http');
+   //The url we want is `www.nodejitsu.com:1337/`
+  var options = {
+     host: '125.227.43.46',
+     port: '8681',
+     path: '/api/im/censored-words',
+     method: 'GET'
+   };
+ 
+    http.request(options).on('response', function(response) {
+          var data = '';
+          response.on("data", function (chunk) {
+              data += chunk;
+          });
+          response.on('end', function () {
+              callback(JSON.parse(data));
+          });
+          }).end();
+  }
 
