@@ -31,6 +31,10 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     console.log('params',params);
     console.log('params.p',params.fromPeer);
+    _get("censored-words", function(resp){
+        console.log(JSON.parse(resp).data);       
+    });
+
 
  let content = request.params.content;
     console.log('content', content);
@@ -51,3 +55,21 @@ AV.Cloud.onLogin(function(request) {
     throw new AV.Cloud.Error('Forbidden');
   }
 });
+
+
+function _get(api_func,callback) {
+    var options = {
+        uri : API_URL+api_func,
+        method : 'GET'
+    }; 
+    var res = '';
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res = body;
+        }
+        else {
+            res = 'Not Found';
+        }
+        callback(res);
+    });
+}
