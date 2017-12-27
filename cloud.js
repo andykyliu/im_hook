@@ -54,9 +54,9 @@ AV.Cloud.onIMMessageReceived((request) => {
     console.log('params',params);
     console.log('params.p',params.fromPeer);
 
-    api_get('censored-words', function(resp){
-        console.log(JSON.parse(resp));       
-    });
+//    api_get('censored-words', function(resp){
+//        console.log(JSON.parse(resp));       
+//    });
 
 
  let content = request.params.content;
