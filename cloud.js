@@ -33,19 +33,24 @@ AV.Cloud.onIMMessageReceived((request) => {
      let params = request.params;
      let content = request.params.content;
      var http = require('http');
-     var emp = [];
+     var word = [];
      var extServerOptions = {
          host: API_URL,
          port: API_URL_PORT,
          path: '/api/im/censored-words',
          method: 'GET'
      };
+     let processedContent=content;
      function get() {
          http.request(extServerOptions, function (res) {
              res.setEncoding('utf8');
              res.on('data', function (data) {
-                 emp = JSON.parse(data);
-                 console.log(emp.data);
+                 word = JSON.parse(data);
+                 word.data.forEach(function(w){
+                     processedContent = content.replace(w, '**');
+                 })
+
+             
              });
           }).end();
      };
@@ -53,7 +58,6 @@ AV.Cloud.onIMMessageReceived((request) => {
 
 
 
-    let processedContent = content.replace('XX中介', '**');
     console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return {
