@@ -1,4 +1,5 @@
 var AV = require('leanengine');
+var request = require('request');
 var URL='http://125.227.43.46:8681';
 var API_URL=URL+'/api/im/';
 /**
