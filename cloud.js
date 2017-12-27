@@ -1,6 +1,7 @@
 var AV = require('leanengine');
-var API_URL='125.227.43.46';
-var API_URL_PORT='8681';
+var request = require('request');
+var URL='http://125.227.43.46:8681';
+var API_URL=URL+'/api/im/';
 /**
  * 一个简单的云代码方法
  */
@@ -29,28 +30,11 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
-    let params = request.params;
-    var http = require('http');
-    var emp = [];
-    var extServerOptions = {
-        host: API_URL,
-        port: API_URL_PORT,
-        path: '/api/im/blacklist?memberId=90192197-5B09-E711-8D8E-000C2924F676',
-        method: 'GET'
-    };
-    function get() {
-        http.request(extServerOptions, function (res) {
-            res.setEncoding('utf8');
-            res.on('data', function (data) {
-                emp = JSON.parse(data);
-                console.log(emp);
-            });
-         }).end();
-    };
-    get();
     console.log('params',params);
     console.log('params.p',params.fromPeer);
-
+    _get("censored-words", function(resp){
+        console.log(JSON.parse(resp).data);       
+    });
 
 
  let content = request.params.content;
@@ -72,3 +56,21 @@ AV.Cloud.onLogin(function(request) {
     throw new AV.Cloud.Error('Forbidden');
   }
 });
+
+
+function _get(api_func,callback) {
+    var options = {
+        uri : API_URL+api_func,
+        method : 'GET'
+    }; 
+    var res = '';
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res = body;
+        }
+        else {
+            res = 'Not Found';
+        }
+        callback(res);
+    });
+}
