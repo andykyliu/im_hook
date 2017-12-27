@@ -1,7 +1,6 @@
 var AV = require('leanengine');
-var request = require('request');
-var URL='http://125.227.43.46:8681';
-var API_URL=URL+'/api/im/';
+var API_URL='125.227.43.46';
+var API_URL_PORT='8681';
 /**
  * 一个简单的云代码方法
  */
@@ -30,11 +29,30 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
-    _get('censored-words', function(resp){
-        console.log(JSON.parse(resp).data);       
-    });
-    let content = request.params.content;
-    console.log('content', content);
+
+     let params = request.params;
+     let content = request.params.content;
+     var http = require('http');
+     var emp = [];
+     var extServerOptions = {
+         host: API_URL,
+         port: API_URL_PORT,
+         path: '/api/im/censored-words',
+         method: 'GET'
+     };
+     function get() {
+         http.request(extServerOptions, function (res) {
+             res.setEncoding('utf8');
+             res.on('data', function (data) {
+                 emp = JSON.parse(data);
+                 console.log(emp.data);
+             });
+          }).end();
+     };
+     get();
+
+
+
     let processedContent = content.replace('XX中介', '**');
     console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
@@ -53,20 +71,3 @@ AV.Cloud.onLogin(function(request) {
   }
 });
 
-
-function _get(api_func,callback) {
-    var options = {
-        uri : API_URL+api_func,
-        method : 'GET'
-    }; 
-    var res = '';
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res = body;
-        }
-        else {
-            res = 'Not Found';
-        }
-        callback(res);
-    });
-}
