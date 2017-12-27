@@ -1,6 +1,4 @@
 var AV = require('leanengine');
-var URL='http://125.227.43.46:8681';
-var API_URL=URL+'/api/im/';
 /**
  * 一个简单的云代码方法
  */
@@ -29,11 +27,8 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
-    console.log('params',params);
-    console.log('params.p',params.fromPeer);
-
-
- let content = request.params.content;
+console.log("start");
+    let content = request.params.content;
     console.log('content', content);
     let processedContent = content.replace('XX中介', '**');
     console.log('content', processedContent);
