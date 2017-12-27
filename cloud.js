@@ -29,10 +29,10 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
-//    console.log('params',params);
-//    console.log('params.p',params.fromPeer);
-
- let content = request.params.content;
+    _get('censored-words', function(resp){
+        console.log(JSON.parse(resp).data);       
+    });
+    let content = request.params.content;
     console.log('content', content);
     let processedContent = content.replace('XX中介', '**');
     console.log('content', processedContent);
