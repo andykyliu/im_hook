@@ -32,24 +32,6 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 
- function api_get(api_func,callback) {
-     var options = {
-        uri : 'http://125.227.43.46:8681/api/im/censored-words',
-        method : 'GET'
-     };
-    var res = '';
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-             res = body;
-         }
-         else {
-             res = 'Not Found';
-         }
-         callback(res);
-     });
- }
-
-
 AV.Cloud.onIMMessageReceived((request) => {
     console.log('params',params);
     console.log('params.p',params.fromPeer);
