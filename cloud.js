@@ -30,8 +30,7 @@ AV.Cloud.onIMConversationStarted((request) => {
 
 AV.Cloud.onIMMessageReceived((request) => {
 //    console.log('params',params);
-    console.log('params.p',params.fromPeer);
-
+//    console.log('params.p',params.fromPeer);
 
  let content = request.params.content;
     console.log('content', content);
