@@ -41,6 +41,8 @@ AV.Cloud.onIMMessageReceived((request) => {
             let a = processedContent;
             res.data.forEach(function(w){
               a = a.replace(w,'**');
+              console.log('a',a);
+              console.log('w',w);
             })
             return { content: a}
           })
