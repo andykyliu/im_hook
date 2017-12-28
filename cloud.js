@@ -40,7 +40,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         _censored_words(url).then(res=>{
            res.data.forEach(function(w){
               console.log("processedContent",processedContent);
-              processedContent.replace(w, '**');
+              processedContent.replace('中介', '**');
            })
        })
   };
