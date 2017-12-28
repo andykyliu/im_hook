@@ -37,7 +37,8 @@ AV.Cloud.onIMMessageReceived((request) => {
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return 
         _censored_words(url).then(res=>{
-          content: res.data.map(item => processedContent.replace(item, '**'))
+    ///      content: res.data.map(item => processedContent.replace(item, '**'))
+          console.log(res.data)
        })
   
 });
@@ -51,10 +52,6 @@ AV.Cloud.onLogin(function(request) {
     throw new AV.Cloud.Error('Forbidden');
   }
 });
-
-
-
-
 
 
 function _censored_words(url){
