@@ -39,9 +39,9 @@ AV.Cloud.onIMMessageReceived((request) => {
         _censored_words(url)
           .then(res=> {
             let a = processedContent;
-            res.data.forEach (function(w)) {
+            res.data.forEach(function(w){
               a = a.replace(w,'**');
-            }
+            })
             return { content: a}
           })
   
