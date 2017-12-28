@@ -37,7 +37,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return {
     content:
-        processedContent.replace('x', '**')
+        processedContent.replace('x', '**');
         console.log('p',processedContent);
   };
 });
