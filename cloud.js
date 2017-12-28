@@ -33,14 +33,18 @@ AV.Cloud.onIMMessageReceived((request) => {
     let params = request.params;
     let content = request.params.content;
     let processedContent = content;
-    console.log("a",processedContent);
-  return {
-content:
-        _censored_words(url).then(res=>{
-          console.log(res.data.map(item => processedContent.replace(item, '**')));
-          console.log('aa',res.data.map(item=>item+"|"));
-       })
-}  
+   // console.log('content', processedContent);
+    // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
+  return 
+        _censored_words(url)
+          .then(res=> {
+            let a = processedContent;
+            res.data.forEach (function(w)) {
+              a = a.replace(w,'**');
+            }
+            return { content: a}
+          })
+  
 });
 
 
@@ -52,6 +56,7 @@ AV.Cloud.onLogin(function(request) {
     throw new AV.Cloud.Error('Forbidden');
   }
 });
+
 
 
 function _censored_words(url){
