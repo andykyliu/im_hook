@@ -1,4 +1,3 @@
-var rp = require('request-promise');
 var AV = require('leanengine');
 var API_URL='125.227.43.46';
 var API_URL_PORT='8681';
