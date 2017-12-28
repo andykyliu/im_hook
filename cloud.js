@@ -1,6 +1,6 @@
 var AV = require('leanengine');
-var API_URL='125.227.43.46';
-var API_URL_PORT='8681';
+var fetch = require('node-fetch');
+var API_URL='http://125.227.43.46:8681/api/im/';
 /**
  * 一个简单的云代码方法
  */
@@ -29,15 +29,20 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
+    var url=API_URL+'censored-words';
+    let params = request.params;
+    let content = request.params.content;
+   //  let processedContent = content.replace('XX中介', '**');
 
-     let params = request.params;
-     let content = request.params.content;
-      let processedContent = content.replace('XX中介', '**');
-
-    console.log('content', processedContent);
+   // console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return {
-    content: processedContent
+    content: 
+        _censored_words(url).then(res=>{
+           res.data.forEach(function(w){
+               content.replace(w, '**');
+           })
+       })
   };
 });
 
@@ -52,3 +57,14 @@ AV.Cloud.onLogin(function(request) {
 });
 
 
+
+
+
+
+function _censored_words(url){
+    return fetch(url,{
+               method: 'GET',
+               headers: { 'Content-Type': 'application/json' }
+           })
+           .then(res => res.json());
+}

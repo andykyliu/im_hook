@@ -16,13 +16,22 @@
     "express": "4.12.3",
     "leancloud-storage": "^3.0.0",
     "leanengine": "^3.0.0",
+    "node-fetch": "^1.7.3",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "express": "^4.12.3",
+    "nodemon": "^1.11.0",
+    "request": "^2.83.0"
   },
   "engines": {
     "node": "6.x"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@192.30.253.113:andykyliu/im_hook.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
