@@ -38,7 +38,6 @@ AV.Cloud.onIMMessageReceived((request) => {
   return {
     content:
         processedContent.replace('x', '**');
-        console.log('p',processedContent);
   };
 });
 
