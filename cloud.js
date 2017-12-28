@@ -32,7 +32,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     var url=API_URL+'censored-words';
     let params = request.params;
     let content = request.params.content;
-   //  let processedContent = content.replace('XX中介', '**');
+    let processedContent = content;
 
    // console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
@@ -40,7 +40,8 @@ AV.Cloud.onIMMessageReceived((request) => {
     content: 
         _censored_words(url).then(res=>{
            res.data.forEach(function(w){
-               content.replace(w, '**');
+               processedContent.replace(w, '**');
+              console.log(processedContent);
            })
        })
   };
