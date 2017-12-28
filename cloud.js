@@ -1,3 +1,4 @@
+var rp = require('request-promise');
 var AV = require('leanengine');
 var API_URL='125.227.43.46';
 var API_URL_PORT='8681';
@@ -32,12 +33,6 @@ AV.Cloud.onIMMessageReceived((request) => {
 
      let params = request.params;
      let content = request.params.content;
-     var word="";
-     g(function(p){
-          word=p;
-      });
-
-console.log(word);
       let processedContent = content.replace('XX中介', '**');
 
     console.log('content', processedContent);
@@ -57,24 +52,4 @@ AV.Cloud.onLogin(function(request) {
   }
 });
 
- function g(callback){
-   var http = require('http');
-   //The url we want is `www.nodejitsu.com:1337/`
-  var options = {
-     host: '125.227.43.46',
-     port: '8681',
-     path: '/api/im/censored-words',
-     method: 'GET'
-   };
- 
-    http.request(options).on('response', function(response) {
-          var data = '';
-          response.on("data", function (chunk) {
-              data += chunk;
-          });
-          response.on('end', function () {
-              callback(JSON.parse(data));
-          });
-          }).end();
-  }
 
