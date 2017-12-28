@@ -34,12 +34,13 @@ AV.Cloud.onIMMessageReceived((request) => {
     let content = request.params.content;
     let processedContent = content;
     console.log("a",processedContent);
-  return content:
+  return {
+content:
         _censored_words(url).then(res=>{
           console.log(res.data.map(item => processedContent.replace(item, '**')));
           console.log('aa',res.data.map(item=>item+"|"));
        })
-  
+}  
 });
 
 
