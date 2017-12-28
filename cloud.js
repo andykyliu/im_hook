@@ -36,8 +36,9 @@ AV.Cloud.onIMMessageReceived((request) => {
    // console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return {
-    content: 
-              processedContent.replace('中介', '**')
+        _censored_words(url).then(res=>{
+             content: processedContent.replace('中介', '**')
+       })
   };
 });
 
