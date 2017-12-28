@@ -19,7 +19,7 @@ AV.Cloud.afterSave('_User', function(request) {
 
 AV.Cloud.onIMConversationStarted((request) => {
     let params = request.params;
-    console.log('params', params);
+    //console.log('params', params);
 
     // 在云引擎中打印的日志如下：
     // params {
@@ -41,7 +41,8 @@ AV.Cloud.onIMMessageReceived((request) => {
         _censored_words(url).then(res=>{
            res.data.forEach(function(w){
                processedContent.replace(w, '**');
-              console.log(processedContent);
+              console.log("w",w);
+              console.log("processcontent:", processedContent);
            })
        })
   };
