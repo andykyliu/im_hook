@@ -37,7 +37,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return 
         _censored_words(url).then(res=> {
-            { content: '23456'};
+           return { content: '23456'}
         })
 });
 
@@ -54,7 +54,7 @@ AV.Cloud.onLogin(function(request) {
 
 
 function _censored_words(url){
-    return fetch(url,{
+    return fetch('http://125.227.43.46:8681/api/im/censored-words',{
                method: 'GET',
                headers: { 'Content-Type': 'application/json' }
            })
