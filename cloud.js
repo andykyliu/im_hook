@@ -46,7 +46,7 @@ content:
               console.log('a',a);
               console.log('w',w);
             })
-            : a
+            a
           })
 }  
 });
