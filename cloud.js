@@ -41,11 +41,12 @@ AV.Cloud.onIMMessageReceived((request) => {
             let a = processedContent;
             console.log('2',a);
             res.data.forEach(function(w){
-              a = a.replace(w,'**');
+              a = a+w;
               console.log('a',a);
               console.log('w',w);
             })
-            return { content: a}
+            console.log('w',w);
+            return { content: '23456'}
           })
   
 });
