@@ -40,9 +40,8 @@ AV.Cloud.onIMMessageReceived((request) => {
 content:
        _censored_words(url)
           .then(res=> {
+            console.log(res.data);
             res.data;
-            console.log(res.data)
-
           })
 }  
 });
