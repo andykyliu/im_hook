@@ -36,7 +36,9 @@ AV.Cloud.onIMMessageReceived((request) => {
    // console.log('content', processedContent);
     // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
   return 
-        _censored_words(url)
+{
+content:
+       _censored_words(url)
           .then(res=> {
             let a = processedContent;
             res.data.forEach(function(w){
@@ -44,9 +46,9 @@ AV.Cloud.onIMMessageReceived((request) => {
               console.log('a',a);
               console.log('w',w);
             })
-            return { content: a}
+            : a
           })
-  
+}  
 });
 
 
