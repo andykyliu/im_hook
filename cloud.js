@@ -30,7 +30,7 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     let url=API_URL+'censored-words';
     let content = request.params.content;
-    let processedContent=content;
+    var processedContent=content;
 
     var tmp_content;
     var sync_request=require('sync-request');
@@ -42,7 +42,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     })
     console.log("processedContent 2:",tmp_content);
   return{
-    content: tmp_content
+    content: tmp_content+"<=111"
   };
 });
 
