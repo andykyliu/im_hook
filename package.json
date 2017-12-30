@@ -19,7 +19,8 @@
     "leanengine": "^3.0.0",
     "node-fetch": "^1.7.3",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "sync-request": "^4.1.0"
   },
   "devDependencies": {
     "express": "^4.12.3",
