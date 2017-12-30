@@ -33,11 +33,11 @@ AV.Cloud.onIMMessageReceived((request) => {
     var url=API_URL+'censored-words';
     let params = request.params;
     let content = request.params.content;
-    let processedContent = content;
+    let processedContent;
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
     getUrlData.map(function(w){
-        processedContent=processedContent.replace(w,"**");
+        processedContent=content.replace(w,"**");
     })
   return
   {
