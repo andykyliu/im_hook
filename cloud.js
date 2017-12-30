@@ -1,5 +1,5 @@
 var AV = require('leanengine');
-var fetch = require('node-fetch');
+var request=require('sync-request');
 var API_URL='http://125.227.43.46:8681/api/im/';
 /**
  * 一个简单的云代码方法
@@ -33,12 +33,14 @@ AV.Cloud.onIMMessageReceived((request) => {
     let params = request.params;
     let content = request.params.content;
     let processedContent = content;
-    console.log('content', processedContent);
-    // 必须含有以下语句给服务端一个正确的返回，否则会引起异常
+    let res = request('GET', url);
+    let getUrlData=JSON.parse(res.getBody()).data;
+    getUrlData.map(function(w){
+        processedContent=processedContent.replace(w,"**");
+    })
+
   return 
-        _censored_words(url).then(res=> {
-           return { content: '23456'}
-        })
+    content: processedContent
 });
 
 
@@ -52,11 +54,3 @@ AV.Cloud.onLogin(function(request) {
 });
 
 
-
-function _censored_words(url){
-    return fetch('http://125.227.43.46:8681/api/im/censored-words',{
-               method: 'GET',
-               headers: { 'Content-Type': 'application/json' }
-           })
-           .then(res => res.json());
-}
