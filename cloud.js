@@ -32,17 +32,16 @@ AV.Cloud.onIMMessageReceived((request) => {
     let content = request.params.content;
     var processedContent=content;
 
-    var tmp_content;
     var sync_request=require('sync-request');
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
     getUrlData.map(function(w){
-        tmp_content=processedContent.replace(w,"**");
+        processedContent=processedContent.replace(w,"**");
         console.log("w:",w);
     })
-    console.log("processedContent 2:",tmp_content);
+    console.log("processedContent 2:",processedContent);
   return{
-    content: tmp_content+"<=111"
+    content: processedContent
   };
 });
 
