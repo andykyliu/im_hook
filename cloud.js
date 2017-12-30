@@ -1,4 +1,5 @@
 var AV = require('leanengine');
+var fetch = require('node-fetch');
 var sync_request=require('sync-request');
 var API_URL='http://125.227.43.46:8681/api/im/';
 /**
