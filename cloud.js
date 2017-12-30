@@ -46,8 +46,8 @@ AV.Cloud.onIMMessageReceived((request) => {
     let f=processedContent;
   return
   {
-    content: f+"vv"
-  }
+    content: "vv"
+  };
 });
 
 
