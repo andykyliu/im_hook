@@ -41,9 +41,8 @@ AV.Cloud.onIMMessageReceived((request) => {
         console.log("w:",w);
     })
     console.log("processedContent 2:",tmp_content);
-    let f=tmp_content;
   return{
-    content: "aaa"
+    content: tmp_content
   };
 });
 
