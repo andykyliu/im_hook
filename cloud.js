@@ -31,17 +31,18 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     var url=API_URL+'censored-words';
     let params = request.params;
-    let content = request.params.content;
-    let processedContent;
+    var content = request.params.content;
+    var processedContent;
 
     var sync_request=require('sync-request');
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
-    console.log("processedContent",getUrlData);
+    console.log("processedContent 1:",getUrlData);
     getUrlData.map(function(w){
         processedContent=content.replace(w,"**");
+        console.log("processedContent:",processedContent);
     })
-    console.log("processedContent",processedContent);
+    console.log("processedContent 2:",processedContent);
   return
   {
     content: processedContent
