@@ -1,5 +1,5 @@
 var AV = require('leanengine');
-var request=require('sync-request');
+var sync_request=require('sync-request');
 var API_URL='http://125.227.43.46:8681/api/im/';
 /**
  * 一个简单的云代码方法
@@ -33,7 +33,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     let params = request.params;
     let content = request.params.content;
     let processedContent = content;
-    let res = request('GET', url);
+    let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
     getUrlData.map(function(w){
         processedContent=processedContent.replace(w,"**");
