@@ -38,9 +38,10 @@ AV.Cloud.onIMMessageReceived((request) => {
     getUrlData.map(function(w){
         processedContent=processedContent.replace(w,"**");
     })
-
-  return 
+  return
+  {
     content: processedContent
+  }
 });
 
 
