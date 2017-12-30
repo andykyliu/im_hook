@@ -31,23 +31,22 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     var url=API_URL+'censored-words';
     let params = request.params;
-    var content = request.params.content;
+    let content = request.params.content;
     let processedContent=content;
 
     var tmp_content;
     var sync_request=require('sync-request');
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
-    console.log("processedContent 1:",getUrlData);
     getUrlData.map(function(w){
         tmp_content=processedContent.replace(w,"**");
         console.log("w:",w);
     })
-    console.log("processedContent 2:",processedContent);
+    console.log("processedContent 2:",tmp_content);
     let f=tmp_content;
   return
   {
-    content: f
+    content: f+"aaa"
   };
 });
 
