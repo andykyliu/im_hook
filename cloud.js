@@ -32,15 +32,15 @@ AV.Cloud.onIMMessageReceived((request) => {
     let content = request.params.content;
     var processedContent=content;
 
-   // var sync_request=require('sync-request');
-   // let res = sync_request('GET', url);
-   // let getUrlData=JSON.parse(res.getBody()).data;
-   // getUrlData.map(function(w){
-   //     processedContent=processedContent.replace(w,"**");
-   //     console.log("w:",w);
-   // })
-    processedContent=processedContent.replace("幹","**");
-   // console.log("processedContent 2:",processedContent);
+    var sync_request=require('sync-request');
+    let res = sync_request('GET', url);
+    let getUrlData=JSON.parse(res.getBody()).data;
+    getUrlData.map(function(w){
+        processedContent=processedContent.replace(w,"**");
+        console.log("w:",w);
+    })
+   // processedContent=processedContent.replace("幹","**");
+    console.log("processedContent 2:",processedContent);
   return{
     content: processedContent
   };
