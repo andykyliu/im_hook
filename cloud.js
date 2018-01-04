@@ -39,6 +39,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         processedContent=processedContent.replace(w,"**");
         console.log("w:",w);
     })
+    processedContent=processedContent.replace("幹","**");
     console.log("processedContent 2:",processedContent);
   return{
     content: processedContent
