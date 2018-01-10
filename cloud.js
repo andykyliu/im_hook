@@ -45,7 +45,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     console.log(getUrlData_blacklist);
     if(getUrlData_blacklist.data>0){
         processedContent=JSON.parse(processedContent);
-        processedContent="Message can not be sent.";
+        processedContent._lctext="Message can not be sent.";
         processedContent._lctype=1000+getUrlData_blacklist.data;
         return{
             content: processedContent
