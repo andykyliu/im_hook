@@ -38,8 +38,10 @@ AV.Cloud.onIMMessageReceived((request) => {
 
     let res_blacklist=sync_request('GET', url_blacklist);
     if(res_blacklist.statusCode==400){
+        console.log('1');
         return {}
     }
+    console.log('123');
     let getData_blacklist=JSON.parse(res_blacklist.getBody());
     console.log(getUrlData_blacklist);
     if(getUrlData_blacklist.data>0){
