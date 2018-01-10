@@ -34,7 +34,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
 
     let res_blacklist=sync_request('GET', url_blacklist);
-    let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
+ //   let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
  //   console.log(getUrlData_blacklist);
 
 
