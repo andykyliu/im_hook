@@ -33,15 +33,15 @@ AV.Cloud.onIMMessageReceived((request) => {
     url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
     url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
 
+    let res_blacklist=sync_request('GET', url_blacklist);
+    let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
+ //   console.log(getUrlData_blacklist);
 
 
     let url=API_URL+'censored-words';
     let content = request.params.content;
     var processedContent=content;
 
-    let res_blacklist=sync_request('GET', url_blacklist);
-    let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
-console.log(getUrlData_blacklist);
 //    if(getUrlData_blacklist.data==undefined){
 //       console.log('error');
 //       return {};
