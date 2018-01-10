@@ -38,15 +38,14 @@ AV.Cloud.onIMMessageReceived((request) => {
 
     let res_blacklist=sync_request('GET', url_blacklist);
     if(res_blacklist.statusCode==400){
-        console.log('1');
+        console.log('error code:400 account does not exist!');
         return {}
     }
-    console.log('123');
     let getData_blacklist=JSON.parse(res_blacklist.getBody());
     console.log(getUrlData_blacklist);
     if(getUrlData_blacklist.data>0){
         processedContent=JSON.parse(processedContent);
-        processedContent="";
+        processedContent="Message can not be sent.";
         processedContent._lctype=1000+getUrlData_blacklist.data;
         return{
             content: processedContent
