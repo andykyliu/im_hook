@@ -30,7 +30,7 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     let url_blacklist=API_URL+'sender-validity-check?';
     url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer
-    url_blacklist=url_blacklist+"recipientMemberId="+request.params.toPeers[0]
+    url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0]
     console.log(url_blacklist);
     let url=API_URL+'censored-words';
     let content = request.params.content;
