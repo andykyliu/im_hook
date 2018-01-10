@@ -28,6 +28,10 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
+    let url_blacklist=API_URL+'sender-validity-check?';
+    url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer
+    url_blacklist=url_blacklist+"recipientMemberId="+request.params.toPeers[0]
+    console.log(url_blacklist);
     let url=API_URL+'censored-words';
     let content = request.params.content;
     var processedContent=content;
@@ -39,6 +43,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         processedContent=processedContent.replace(w,"**");
         console.log("w:",w);
     })
+    processedContent._lctype=1000;
    // processedContent=processedContent.replace("幹","**");
     console.log("processedContent 2:",processedContent);
   return{
