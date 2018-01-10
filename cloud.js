@@ -29,23 +29,31 @@ AV.Cloud.onIMConversationStarted((request) => {
 
 AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
+    let content = request.params.content;
+    var processedContent=content;
+    //black list
     let url_blacklist=API_URL+'sender-validity-check?';
     url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
     url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
 
     let res_blacklist=sync_request('GET', url_blacklist);
- //   let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
- //   console.log(getUrlData_blacklist);
-
-
+    if(res_blacklist.statusCode==400){
+        return {}
+    }
+    let getData_blacklist=JSON.parse(res_blacklist.getBody());
+    console.log(getUrlData_blacklist);
+    if(getUrlData_blacklist.data>0){
+        processedContent=JSON.parse(processedContent);
+        processedContent="";
+        processedContent._lctype=1000+getUrlData_blacklist.data;
+        return{
+            content: processedContent
+        };
+    }
+        
+    //censored words
     let url=API_URL+'censored-words';
-    let content = request.params.content;
-    var processedContent=content;
-
-//    if(getUrlData_blacklist.data==undefined){
-//       console.log('error');
-//       return {};
-//    }
+  
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
     getUrlData.map(function(w){
@@ -54,7 +62,6 @@ AV.Cloud.onIMMessageReceived((request) => {
     })
     processedContent=JSON.parse(processedContent);
     processedContent._lctype=1000;
-   // processedContent=processedContent.replace("幹","**");
     console.log("processedContent 2:",processedContent);
   return{
     content: processedContent
