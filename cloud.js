@@ -41,10 +41,11 @@ AV.Cloud.onIMMessageReceived((request) => {
 
     let res_blacklist=sync_request('GET', url_blacklist);
     let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
-    if(getUrlData_blacklist.data==undefined){
-       console.log('error');
-       return {};
-    }
+console.log(getUrlData_blacklist);
+//    if(getUrlData_blacklist.data==undefined){
+//       console.log('error');
+//       return {};
+//    }
     let res = sync_request('GET', url);
     let getUrlData=JSON.parse(res.getBody()).data;
     getUrlData.map(function(w){
