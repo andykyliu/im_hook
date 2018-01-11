@@ -41,7 +41,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         console.log('error code:400 account does not exist!');
         console.log('url',url_blacklist);
         return{
-            code: '400',
+            code: 400,
             drop: true
         };
      }
@@ -50,7 +50,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     if(getUrlData_blacklist.data>0){
         console.log('errer: black list');
         return{
-            code: '1000',
+            code: 1000,
             drop: true
         };
     }
