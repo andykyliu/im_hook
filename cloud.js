@@ -40,24 +40,16 @@ AV.Cloud.onIMMessageReceived((request) => {
     if(res_blacklist.statusCode==400){
         console.log('error code:400 account does not exist!');
         console.log('url',url_blacklist);
-
-        processedContent=JSON.parse(processedContent);
-        processedContent._lctext="account does not exist!.";
-        processedContent._lctype=400;
-        console.log('errer',processedContent);
         return{
-            content: processedContent
+            drop: true
         };
      }
     let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
     console.log(getUrlData_blacklist);
     if(getUrlData_blacklist.data>0){
-        processedContent=JSON.parse(processedContent);
-        processedContent._lctext="Message can not be sent.";
-        processedContent._lctype=1000+getUrlData_blacklist.data;
-        console.log('errer',processedContent);
+        console.log('errer: black list');
         return{
-            content: processedContent
+            drop: true
         };
     }
         
@@ -72,7 +64,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     })
     processedContent=JSON.parse(processedContent);
     processedContent._lctype=1000;
-    console.log("processedContent 2:",processedContent);
+    console.log("processedContent:",processedContent);
   return{
     content: processedContent
   };
