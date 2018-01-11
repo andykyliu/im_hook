@@ -63,6 +63,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         console.log("w:",w);
     })
     processedContent=JSON.parse(processedContent);
+    processedContent._lctype=500;
     console.log("processedContent:",processedContent);
   return{
     content: processedContent
