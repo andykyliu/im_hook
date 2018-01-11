@@ -42,6 +42,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         processedContent=JSON.parse(processedContent);
         processedContent._lctext="account does not exist!.";
         processedContent._lctype=400;
+        console.log('errer',processedContent);
         return{
             content: processedContent
         };
@@ -52,6 +53,7 @@ AV.Cloud.onIMMessageReceived((request) => {
         processedContent=JSON.parse(processedContent);
         processedContent._lctext="Message can not be sent.";
         processedContent._lctype=1000+getUrlData_blacklist.data;
+        console.log('errer',processedContent);
         return{
             content: processedContent
         };
