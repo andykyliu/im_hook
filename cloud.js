@@ -44,13 +44,13 @@ AV.Cloud.onIMMessageReceived((request) => {
         console.log('url',url_blacklist);
         return{
             drop: true,
-            code: 400
+            code: 4000
         };
      }
     let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
     console.log(getUrlData_blacklist);
     if(getUrlData_blacklist.data>0){
-        console.log('errer: black list');
+        console.log('errer');
         return{
             drop: true,
             code: 1000+getUrlData_blacklist.data
