@@ -31,40 +31,39 @@ AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
     let content = request.params.content;
     var processedContent=content;
-    //black list
-    let url_blacklist=API_URL+'sender-validity-check?';
-    url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
-    url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
+    if(content._lctype<0){
+        //black list
+        let url_blacklist=API_URL+'sender-validity-check?';
+        url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
+        url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
 
-
-    console.log('url:',url_blacklist);
-    let res_blacklist=sync_request('GET', url_blacklist);
-    if(res_blacklist.statusCode==400){
-        console.log('error code:400 account does not exist!');
-        console.log('url',url_blacklist);
-        return{
-            drop: true,
-            code: 4000
-        };
-     }
-    let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
-    if(getUrlData_blacklist.data>0){
-        console.log('errer code',1000+getUrlData_blacklist.data);
-     //   return{
-     //       drop: true,
-     //       code: 1000+getUrlData_blacklist.data
-     //   };
-    }
+        console.log('url:',url_blacklist);
+        let res_blacklist=sync_request('GET', url_blacklist);
+        if(res_blacklist.statusCode==400){
+            console.log('error code:400 account does not exist!');
+            console.log('url',url_blacklist);
+            return{
+                drop: true,
+                code: 4000
+            };
+        }
+        let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
+        if(getUrlData_blacklist.data>0){
+            console.log('errer code',1000+getUrlData_blacklist.data);
+            return{
+                drop: true,
+                code: 1000+getUrlData_blacklist.data
+            };
+        }
         
-    //censored words
-    let url=API_URL+'censored-words';
-  
-    let res = sync_request('GET', url);
-    let getUrlData=JSON.parse(res.getBody()).data;
-    getUrlData.map(function(w){
-        processedContent=processedContent.replace(w,"**");
-        console.log("w:",w);
-    })
+        //censored words
+        let url=API_URL+'censored-words';
+        let res = sync_request('GET', url);
+        let getUrlData=JSON.parse(res.getBody()).data;
+        getUrlData.map(function(w){
+            processedContent=processedContent.replace(w,"**");
+        })
+    }
     processedContent=JSON.parse(processedContent);
     console.log("processedContent:",processedContent);
   return{
