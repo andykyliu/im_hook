@@ -31,7 +31,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
     let content = request.params.content;
     var processedContent=content;
-    if(content._lctype<0){
+    if(processedContent._lctype<0){
         //black list
         let url_blacklist=API_URL+'sender-validity-check?';
         url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
