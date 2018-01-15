@@ -50,10 +50,10 @@ AV.Cloud.onIMMessageReceived((request) => {
     let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
     if(getUrlData_blacklist.data>0){
         console.log('errer code',1000+getUrlData_blacklist.data);
-        return{
-            drop: true,
-            code: 1000+getUrlData_blacklist.data
-        };
+     //   return{
+     //       drop: true,
+     //       code: 1000+getUrlData_blacklist.data
+     //   };
     }
         
     //censored words
