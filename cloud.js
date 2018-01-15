@@ -61,10 +61,10 @@ AV.Cloud.onIMMessageReceived((request) => {
         let res = sync_request('GET', url);
         let getUrlData=JSON.parse(res.getBody()).data;
         getUrlData.map(function(w){
-            Content=Content.replace(w,"**");
+            content=content.replace(w,"**");
         })
     }
-    processedContent=JSON.parse(Content);
+    processedContent=JSON.parse(content);
     console.log("processedContent:",processedContent);
   return{
     content: processedContent
