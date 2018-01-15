@@ -38,7 +38,6 @@ AV.Cloud.onIMMessageReceived((request) => {
         url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
         url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
 
-        console.log('url:',url_blacklist);
         let res_blacklist=sync_request('GET', url_blacklist);
         if(res_blacklist.statusCode==400){
             console.log('error code:400 account does not exist!');
