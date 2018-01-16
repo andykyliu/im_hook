@@ -30,10 +30,11 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
     let content = request.params.content;
-    let type= request.params.content._lctype;
+    console.log(content);
     var processedContent=content;
-    console.log("_cltype",type);
-    if(type<0){
+    var tmp_content=JSON.parse(content);
+    console.log("tmp_con",tmp_content);
+    if(tmp_content._lctype<0){
         //black list
         let url_blacklist=API_URL+'sender-validity-check?';
         url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
