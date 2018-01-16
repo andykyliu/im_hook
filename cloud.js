@@ -33,7 +33,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     console.log(content);
     var processedContent=content;
     var tmp_content=JSON.parse(content);
-    console.log("tmp_con",tmp_content);
+    console.log("tmp_con",tmp_content._lctype);
     if(tmp_content._lctype<0){
         //black list
         let url_blacklist=API_URL+'sender-validity-check?';
