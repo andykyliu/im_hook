@@ -30,9 +30,8 @@ AV.Cloud.onIMConversationStarted((request) => {
 AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
     let content = request.params.content;
-    console.log(content);
     var processedContent=content;
-    var tmp_content=JSON.parse(content);
+    var tmp_content=JSON.parse(request.params.content);
     console.log("tmp_con",tmp_content._lctype);
     if(tmp_content._lctype<0){
         //black list
