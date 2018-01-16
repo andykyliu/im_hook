@@ -28,6 +28,13 @@ AV.Cloud.onIMConversationStarted((request) => {
 });
 
 AV.Cloud.onIMMessageReceived((request) => {
+    let content = request.params.content;
+    var processedContent=content;
+ return{
+
+    content: processedContent
+
+  };
 });
 
 
