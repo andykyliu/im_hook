@@ -1,6 +1,6 @@
 var AV = require('leanengine');
 //var API_URL='http://125.227.43.46:8681/api/im/';
-var API_URL='http://125.227.43.46:8692/api/im';
+var API_URL='http://125.227.43.46:8692/api/im/';
 /**
  * 一个简单的云代码方法
  */
