@@ -33,6 +33,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     let content = request.params.content;
     var processedContent=content;
     var tmp_content=JSON.parse(content);
+    console.log('test',tmp_content._lctype);
     if(tmp_content._lctype<0){
         //black list
 
