@@ -1,8 +1,8 @@
 var AV = require('leanengine');
 //dev
-var API_URL='http://125.227.43.46:8681/api/im/';
+//var API_URL='http://125.227.43.46:8681/api/im/';
 //QA
-//var API_URL='http://125.227.43.46:8692/api/im/';
+var API_URL='http://125.227.43.46:8692/api/im/';
 //boss
 //var API_URL='http://125.227.43.46:8682/api/im/';
 //azure
@@ -51,7 +51,7 @@ AV.Cloud.onIMMessageReceived((request) => {
 
             let res_blacklist=sync_request('GET', url_blacklist);
             if(res_blacklist.statusCode==400){
-                console.log('> error code:400 account does not exist!',url_blacklist);
+                console.log('  > error code:400 account does not exist!',url_blacklist);
                 console.log('***End***');
                 return{
                     drop: true,
@@ -60,7 +60,7 @@ AV.Cloud.onIMMessageReceived((request) => {
             }
             let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
             if(getUrlData_blacklist.data>0){
-                console.log('> errer code:',1000+getUrlData_blacklist.data,url_blacklist);
+                console.log('  > errer code:',1000+getUrlData_blacklist.data,url_blacklist);
                 console.log('***End***');
                 return{
                     drop: true,
