@@ -70,13 +70,6 @@ AV.Cloud.onIMMessageReceived((request) => {
                 check=1;
             }
         }
-        //censored words
-        let url=API_URL+'censored-words';
-        let res = sync_request('GET', url);
-        let getUrlData=JSON.parse(res.getBody()).data;
-        getUrlData.map(function(w){
-            processedContent=processedContent.replace(w,"**");
-        })
     }
 
     if(tmp_content._lctype<0 && request.params.toPeers[0] != undefined && check==0){
@@ -87,6 +80,13 @@ AV.Cloud.onIMMessageReceived((request) => {
              code: 1999
        };
     }
+    //censored words
+    let url=API_URL+'censored-words';
+    let res = sync_request('GET', url);
+    let getUrlData=JSON.parse(res.getBody()).data;
+    getUrlData.map(function(w){
+         processedContent=processedContent.replace(w,"**");
+    })
     console.log("2.Processed Content:",processedContent);
     console.log('***End***');
   return{
