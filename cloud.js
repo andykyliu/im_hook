@@ -45,11 +45,13 @@ AV.Cloud.onIMMessageReceived((request) => {
     console.log('  lcattrs: ',tmp_content._lcattrs.conversationType);
     if(tmp_content._lctype<0){
         //black list
+        
         if(request.params.toPeers[0] != undefined){
             let url_blacklist=API_URL+'sender-validity-check?';
             url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
-            url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
-
+            if(tmp_content._lcattrs.conversationType=="0"){
+                url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
+            }
             let res_blacklist=sync_request('GET', url_blacklist);
             if(res_blacklist.statusCode==400){
                 console.log('  > error code:400 account does not exist!',url_blacklist);
