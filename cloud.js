@@ -42,7 +42,6 @@ AV.Cloud.onIMMessageReceived((request) => {
     var check=0;
     console.log('***Start***');
     console.log('1.Content List:',tmp_content);
-    console.log('  lcattrs: ',tmp_content._lcattrs.conversationType);
     if(tmp_content._lctype<0){
         //black list
         
