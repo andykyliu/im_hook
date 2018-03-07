@@ -49,7 +49,11 @@ AV.Cloud.onIMMessageReceived((request) => {
         if(request.params.toPeers[0] != undefined){
             let url_blacklist=API_URL+'sender-validity-check?';
             url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
-            if(tmp_content._lcattrs.conversationType!=undefined &&  tmp_content._lcattrs.conversationType=="0"){
+            if(tmp_content._lcattrs.conversationType!=undefined){
+                if(tmp_content._lcattrs.conversationType=="0"){
+                    url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
+                }
+            }else{
                 url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
             }
             let res_blacklist=sync_request('GET', url_blacklist);
