@@ -2,17 +2,17 @@ var AV = require('leanengine');
 //dev
 //var API_URL='http://125.227.43.46:8681/api/im/';
 //QA
-var API_URL='http://125.227.43.46:8692/api/im/';
+//var API_URL='http://125.227.43.46:8692/api/im/';
 //boss
-//var API_URL='http://125.227.43.46:8682/api/im/';
+var API_URL='http://125.227.43.46:8682/api/im/';
 //azure
 //var API_URL='https://api-admintool.jsti-ea-ase.p.azurewebsites.net/api/im/';
 /**
  * 一个简单的云代码方法
  */
-AV.Cloud.define('ahello', function(request) {
-  return 'Hello world!';
-})
+//AV.Cloud.define('ahello', function(request) {
+//  return 'Hello world!';
+//})
 
 
 AV.Cloud.afterSave('_User', function(request) {
@@ -23,8 +23,8 @@ AV.Cloud.afterSave('_User', function(request) {
   });
 });
 
-AV.Cloud.onIMConversationStarted((request) => {
-    let params = request.params;
+//AV.Cloud.onIMConversationStarted((request) => {
+//    let params = request.params;
     //console.log('params', params);
 
     // 在云引擎中打印的日志如下：
@@ -32,7 +32,7 @@ AV.Cloud.onIMConversationStarted((request) => {
     //     convId: '5789a33a1b8694ad267d8040',
     //     __sign: '1472723167361,f5ceedde159408002fc4edb96b72aafa14bc60bb'
     // }
-});
+//});
 
 AV.Cloud.onIMMessageReceived((request) => {
     var sync_request=require('sync-request');
