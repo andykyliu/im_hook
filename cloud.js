@@ -2,9 +2,9 @@ var AV = require('leanengine');
 //dev
 //var API_URL='http://125.227.43.46:8681/api/im/';
 //QA
-//var API_URL='http://125.227.43.46:8692/api/im/';
+var API_URL='http://125.227.43.46:8692/api/im/';
 //boss
-var API_URL='http://125.227.43.46:8682/api/im/';
+//var API_URL='http://125.227.43.46:8682/api/im/';
 //azure
 //var API_URL='https://api-admintool.jsti-ea-ase.p.azurewebsites.net/api/im/';
 /**
@@ -41,7 +41,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     var tmp_content=JSON.parse(content);
     var check=0;
     console.log('***Start***');
-    console.log('1.Content List:',tmp_content);
+    console.log('1.Content List:',request.params);
     if(tmp_content._lctype<0){
         //black list
         
