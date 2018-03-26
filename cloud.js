@@ -50,7 +50,6 @@ AV.Cloud.onIMMessageReceived((request) => {
             var sync_group=sync_request('GET', url_group);
             var group_body=JSON.parse(sync_group.getBody());
             var is_group=group_body.data;
-            console.log('    is_group',is_group)
             //check group
             if(is_group=="false"){
                 let url_blacklist=API_URL+'sender-validity-check?';
@@ -82,7 +81,9 @@ AV.Cloud.onIMMessageReceived((request) => {
                 }else{
                     check=1;
                 }
+                console.log('    is_group1:',is_group)
             }else{
+                console.log('    is_group2:',is_group)
                 check=1;
             }
         }
