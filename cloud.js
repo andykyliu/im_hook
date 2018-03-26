@@ -51,7 +51,7 @@ AV.Cloud.onIMMessageReceived((request) => {
             var group_body=JSON.parse(sync_group.getBody());
             var is_group=group_body.data;
             //check group
-            if(is_group=="false"){
+            if(is_group==false){
                 let url_blacklist=API_URL+'sender-validity-check?';
                 url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
                 if(tmp_content._lcattrs!=undefined){
