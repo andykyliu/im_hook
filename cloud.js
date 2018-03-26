@@ -52,9 +52,7 @@ AV.Cloud.onIMMessageReceived((request) => {
             var is_group=group_body.data;
 
             //check group
-            if(is_group=="true"){
-                check=1;
-            }else{
+            if(is_group=="false"){
                 let url_blacklist=API_URL+'sender-validity-check?';
                 url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
                 if(tmp_content._lcattrs!=undefined){
@@ -84,6 +82,8 @@ AV.Cloud.onIMMessageReceived((request) => {
                 }else{
                     check=1;
                 }
+            }else{
+                check=1;
             }
         }
     }
