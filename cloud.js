@@ -50,9 +50,13 @@ AV.Cloud.onIMMessageReceived((request) => {
             var sync_group=sync_request('GET', url_group);
             var group_body=JSON.parse(sync_group.getBody());
             var is_group=group_body.data;
-            let url_blacklist=API_URL+'sender-validity-check?';
-            url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
-            if(is_group=="false"){
+
+            //check group
+            if(is_group=="true"){
+                check=1;
+            }else{
+                let url_blacklist=API_URL+'sender-validity-check?';
+                url_blacklist=url_blacklist+"senderMemberId="+request.params.fromPeer;
                 if(tmp_content._lcattrs!=undefined){
                     if(tmp_content._lcattrs.conversationType=="0"){
                         url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
@@ -60,26 +64,26 @@ AV.Cloud.onIMMessageReceived((request) => {
                 }else{
                     url_blacklist=url_blacklist+"&recipientMemberId="+request.params.toPeers[0];
                 }
-            }
-            let res_blacklist=sync_request('GET', url_blacklist);
-            if(res_blacklist.statusCode==400){
-                console.log('  > error code:400 account does not exist!',url_blacklist);
-                console.log('***End***');
-                return{
-                    drop: true,
-                    code: 4000
-                };
-            }
-            let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
-            if(getUrlData_blacklist.data>0){
-                console.log('  > errer code:',1000+getUrlData_blacklist.data,url_blacklist);
-                console.log('***End***');
-                return{
-                    drop: true,
-                    code: 1000+getUrlData_blacklist.data
-                };
-            }else{
-                check=1;
+                let res_blacklist=sync_request('GET', url_blacklist);
+                if(res_blacklist.statusCode==400){
+                    console.log('  > error code:400 account does not exist!',url_blacklist);
+                    console.log('***End***');
+                    return{
+                        drop: true,
+                        code: 4000
+                    };
+                }
+                let getUrlData_blacklist=JSON.parse(res_blacklist.getBody());
+                if(getUrlData_blacklist.data>0){
+                    console.log('  > errer code:',1000+getUrlData_blacklist.data,url_blacklist);
+                    console.log('***End***');
+                    return{
+                        drop: true,
+                        code: 1000+getUrlData_blacklist.data
+                    };
+                }else{
+                    check=1;
+                }
             }
         }
     }
