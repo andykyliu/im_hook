@@ -81,9 +81,7 @@ AV.Cloud.onIMMessageReceived((request) => {
                 }else{
                     check=1;
                 }
-                console.log('    is_group1:',is_group)
             }else{
-                console.log('    is_group2:',is_group)
                 check=1;
             }
         }
