@@ -3,7 +3,7 @@ var AV = require('leanengine');
 //var API_URL='http://125.227.43.46:8681/api/im/';
 //QA
 var API_URL='http://125.227.43.46:8692/api/im/';
-//boss
+//boss(stage)
 //var API_URL='http://125.227.43.46:8682/api/im/';
 //azure
 //var API_URL='https://api-admintool.jsti-ea-ase.p.azurewebsites.net/api/im/';
