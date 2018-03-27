@@ -41,7 +41,7 @@ AV.Cloud.onIMMessageReceived((request) => {
     var tmp_content=JSON.parse(content);
     var check=0;
     console.log('***Start***');
-    console.log('1.Content List:',request.params.content);
+    console.log('1.Content List:',request.params);
     if(tmp_content._lctype<0){
         //black list
         if(request.params.toPeers[0] != undefined){
