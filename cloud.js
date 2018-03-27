@@ -34,7 +34,8 @@ AV.Cloud.afterSave('_User', function(request) {
     // }
 //});
 
-AV.Cloud.onIMMessageReceived((request) => {
+
+AV.Cloud.onIMMessageReceiveda((request) => {
     var sync_request=require('sync-request');
     let content = request.params.content;
     var processedContent=content;
